@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="connect_four_project.css">
+    <title>Connect Four!</title>
+</head>
+<video autoplay muted loop id="myVideo">
+    <source src="fezbg.mp4" type="video/mp4">
+</video>
+<body>
+    <audio controls muted loop="loop" autoplay="autoplay">
+        <source src="compass.mp3" type="audio/mpeg" />
+    </audio>
+    <div id="player-info">
+        <h2 id="current-player">Welcome to Connect Four!</h2>
+    </div>
+    <div id="game">
+        <table id="board"></table>
+    </div>
+    <script>
+        // Prompt players for their names
+        const player1Name = prompt("Enter Player 1's name:", "Player 1") || "Player 1";
+        const player2Name = prompt("Enter Player 2's name:", "Player 2") || "Player 2";
+
+        // Set initial player name display
+        document.getElementById('current-player').textContent = `${player1Name}'s Turn`;
+
+        // Export player names for use in JavaScript
+        const playerNames = { 1: player1Name, 2: player2Name };
+        localStorage.setItem('playerNames', JSON.stringify(playerNames));
+
+        // Function to change winner's pieces to yellow
+        function highlightWinningPieces(cells) {
+            cells.forEach(([y, x]) => {
+                const cell = document.getElementById(`${y}-${x}`);
+                if (cell && cell.firstChild) {
+                    cell.firstChild.style.backgroundColor = "yellow";
+                }
+            });
+        }
+    </script>
+    <script src="connect_four_project.js"></script>
+</body>
+</html>
